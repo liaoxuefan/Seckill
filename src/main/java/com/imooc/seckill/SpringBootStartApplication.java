@@ -1,4 +1,4 @@
-//package com.imooc.seckill;
+package com.imooc.seckill;
 
 /*import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.support.SpringBootServletInitializer;

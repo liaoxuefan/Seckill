@@ -28,18 +28,7 @@ public class RedisService {
 			jedisToPool(jedis);
 		}
 	}
-	/*
-	 * 删除键值
-	 */
-	public void delete(KeyPrefix prefix, String key){
-		Jedis jedis = null;
-		try{
-			jedis = jedisPool.getResource();
-			jedis.del(prefix.getPrefix() + key);
-		}finally {
-			jedisToPool(jedis);
-		}
-	}
+	
 	
 	
 	/*

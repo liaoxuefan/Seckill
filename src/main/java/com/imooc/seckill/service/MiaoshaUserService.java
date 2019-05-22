@@ -46,43 +46,9 @@ public class MiaoshaUserService {
 		}
 		return miaoshaUser;
 	}
-	/*
-	 * 对象缓存
-	 * 1、取缓存
-	 * 2、没有则去数据库查，查完存缓存
-	 */
-	public MiaoshaUser getById(long id){
-		MiaoshaUser user = redisService.get(MiaoshaUserKey.getById, ""+id, MiaoshaUser.class);
-		if(user==null){
-			user = miaoshaUserDao.getById(id);
-			redisService.set(MiaoshaUserKey.getById, ""+id, user);
-		}
-		return user;
-	}
 	
-	/*
-	 * 更新密码
-	 */
-	public boolean updatePassword(long id, String passwordNew, String token) {
-		MiaoshaUser user = getById(id);
-		if(user == null){
-			throw new GlobalException(CodeMsg.MOBILE_NOT_EXIST);
-		}
-		user = new MiaoshaUser();
-		user.setId(id);
-		user.setPassword(passwordNew);
-		int n = miaoshaUserDao.update(user);
-		/*
-		 * 先更新，再使缓存失效，如果先删缓存后来了一个读操作把老数据又放到了缓存中，在更新数据库则新老不一致
-		 * 更新成功后
-		 * 删除redis缓存中的MiaoshaUserKey:id
-		 * 更新redis缓存中的MiaoshaUserKey:uuid，需要它自动登录
-		 */
-		if(n > 0){
-			redisService.delete(MiaoshaUserKey.getById, ""+id);
-			redisService.set(MiaoshaUserKey.getByUUId, token, user);
-		}
-		return true;
+	public MiaoshaUser getById(long id){
+		return miaoshaUserDao.getById(id);
 	}
 	
 	public boolean login(String uuid, HttpServletResponse response, LoginVo loginVo){
