@@ -12,11 +12,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.imooc.seckill.domain.LoginVo;
-import com.imooc.seckill.result.CodeMsg;
 import com.imooc.seckill.result.Result;
 import com.imooc.seckill.service.MiaoshaUserService;
 import com.imooc.seckill.util.UUIDUtil;
-import com.imooc.seckill.util.ValidatorUtil;
+
 
 
 @Controller
