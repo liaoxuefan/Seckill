@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.thymeleaf.spring4.context.SpringWebContext;
 import org.thymeleaf.spring4.view.ThymeleafViewResolver;
 
-import com.imooc.seckill.GoodsDetailVo;
 import com.imooc.seckill.domain.GoodsVo;
 import com.imooc.seckill.domain.MiaoshaUser;
 import com.imooc.seckill.redis.GoodsKey;
@@ -24,6 +23,7 @@ import com.imooc.seckill.redis.RedisService;
 import com.imooc.seckill.result.Result;
 import com.imooc.seckill.service.GoodsService;
 import com.imooc.seckill.service.MiaoshaUserService;
+import com.imooc.seckill.vo.GoodsDetailVo;
 
 @Controller
 @RequestMapping("/goods")

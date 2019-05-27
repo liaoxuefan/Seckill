@@ -5,6 +5,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.SelectKey;
+import org.springframework.core.annotation.Order;
 
 import com.imooc.seckill.domain.MiaoshaOrder;
 import com.imooc.seckill.domain.OrderInfo;
@@ -21,4 +22,7 @@ public interface OrderDao {
 
 	@Insert("insert into miaosha_order(user_id,order_id,goods_id) values(#{userId},#{orderId},#{goodsId})")
 	public void createMiaoshaOrder(@Param("userId")long userId, @Param("orderId")long orderId, @Param("goodsId")long goodsId);
+	
+	@Select("select * from order_info where id=#{orderId}")
+	public OrderInfo getOrderById(@Param("orderId")long orderId);
 }

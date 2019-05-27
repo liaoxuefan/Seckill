@@ -1,4 +1,4 @@
-package com.imooc.seckill;
+package com.imooc.seckill.vo;
 
 import com.imooc.seckill.domain.GoodsVo;
 import com.imooc.seckill.domain.MiaoshaUser;
