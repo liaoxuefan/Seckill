@@ -28,10 +28,17 @@ public class MQConfig {
 	
 	public static final String HEADER = "header";
 	public static final String HEADER_QUEUE= "header_queue";
+	
+	public static final String 	MIAOSHA_QUEUE= "miaosha_queue";
  	
 	@Bean
 	public Queue queue(){
 		return new Queue(QUEUE, true);
+	}
+	
+	@Bean
+	public Queue miaoshaQueue(){
+		return new Queue(MIAOSHA_QUEUE, true);
 	}
 	
 	/*

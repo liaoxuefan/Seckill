@@ -26,6 +26,10 @@ public class CodeMsg {
 	//秒杀模块5005XX
 	public static CodeMsg MIAOSHA_OVER = new CodeMsg(500500, "库存不足");
 	public static CodeMsg REPEAT_MIAOSHA = new CodeMsg(500501, "不能重复秒杀");
+	public static CodeMsg REQUEST_ILLEGAL = new CodeMsg(500502, "请求非法");
+	public static CodeMsg VERIFYCODE_ERROR = new CodeMsg(500502, "验证码失效或错误");
+	public static CodeMsg VERIFYCODE_EMPTY = new CodeMsg(500502, "验证码为空");
+	
 	
 	private CodeMsg(int code, String msg) {
 		this.code = code;

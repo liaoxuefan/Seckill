@@ -14,7 +14,7 @@ import org.springframework.boot.web.support.SpringBootServletInitializer;
 @SpringBootApplication
 public class MainApplication
 {
-    public static void main( String[] args )
+    public static void main(String[] args)
     {
         SpringApplication.run(MainApplication.class, args);
     }

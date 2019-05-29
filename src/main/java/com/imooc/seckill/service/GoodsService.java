@@ -22,8 +22,12 @@ public class GoodsService {
 		return goodsDao.getGoodsVoByGoodsId(goodsId);
 	}
 
-	public int reduceStock(long goodsId) {
-		return goodsDao.reduceStock(goodsId);
+	public boolean reduceStock(long goodsId) {
+		int isReduce = goodsDao.reduceStock(goodsId);
+		if(isReduce > 0){
+			return true;
+		}
+		return false;
 	}
 	
 }

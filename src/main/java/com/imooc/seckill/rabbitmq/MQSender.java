@@ -26,6 +26,13 @@ public class MQSender {
 		logger.info("Sender send message:"+msg);
 		amqpTemplate.convertAndSend(MQConfig.QUEUE,msg);
 	}
+	
+	public void sendMiaoshaMessage(MiaoshaMessage message){
+		String mm = redisService.beanToString(message);
+		logger.info("Sender send MiaoshaMessage:"+mm);
+		amqpTemplate.convertAndSend(MQConfig.MIAOSHA_QUEUE,mm);
+	}
+	
 	/*
 	 * TopicExchange
 	 */

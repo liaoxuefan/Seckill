@@ -22,7 +22,7 @@
 <div class="panel panel-default">
   <div class="panel-heading">秒杀订单详情</div>
   <table class="table" id="goodslist">
-        <tr>  
+     <tr>  
         <td>商品名称</td>  
         <td id="goodsName" colspan="3"></td> 
      </tr>  
@@ -40,16 +40,14 @@
      </tr>
      <tr>
      	<td>订单状态</td>  
-        <td>
-        	<td id="status"></td>
-        </td>  
+        <td id="status"></td>
         <td>
         	<button class="btn btn-primary btn-block" type="button" id="payButton" disabled="true" >立即支付</button>
         </td>
      </tr>
       <tr>
      	<td>收货人</td>  
-        	<td colspan="2">廖XX  1597090XXXX</td>  
+        <td colspan="2">廖XX  1597090XXXX</td>  
      </tr>
      <tr>
      	<td>收货地址</td>  
@@ -61,7 +59,6 @@
 </body>
 <script>
 	function render(info){
-		alert("");
 		var goods = info.goodsVo;
 		var orderInfo = info.orderInfo;
 		$("#goodsName").text(orderInfo.goodsName);
@@ -93,10 +90,9 @@
 	
 	function getOrderDetail(){
 		var orderId = g_getQueryString("orderId");
-		alert(orderId);
 		$.ajax({
 			url:"/order/detail",
-			type:"POST",
+			type:"GET",//不能用POST，否则总是为null
 			data:{
 				orderId:orderId	
 			},
