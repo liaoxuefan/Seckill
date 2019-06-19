@@ -15,7 +15,7 @@ public class IsMobileValidator implements ConstraintValidator<IsMobile, String>{
 	private static boolean required = false;
 	
 	public void initialize(IsMobile constraintAnnotation) {
-		//获取电话值是否是必须的
+		//获取IsMobile注解上的required()值，表示电话值是否是必须的
 		required = constraintAnnotation.required();
 	}
 

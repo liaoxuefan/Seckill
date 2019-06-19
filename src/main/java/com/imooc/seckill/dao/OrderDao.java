@@ -12,7 +12,7 @@ import com.imooc.seckill.domain.OrderInfo;
 
 @Mapper
 public interface OrderDao {
-	
+	//记得加上@Param
 	@Select("select * from miaosha_order where user_id=#{userId} and goods_id=#{goodsId}")
 	public MiaoshaOrder getMiaoshaOrderByUserIdGoodsId(@Param("userId")long userId,@Param("goodsId") long goodsId);
 

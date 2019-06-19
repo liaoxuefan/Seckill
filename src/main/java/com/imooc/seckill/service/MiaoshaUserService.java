@@ -38,6 +38,7 @@ public class MiaoshaUserService {
 	public MiaoshaUser getByToken(HttpServletResponse response, String token){
 		MiaoshaUser miaoshaUser = redisService.get(MiaoshaUserKey.getByUUId, token, MiaoshaUser.class);
 		if(miaoshaUser != null){
+			//重新设置token的存活时间：最后一次登录+过期时间
 			redisService.set(MiaoshaUserKey.getByUUId, token, miaoshaUser);
 			Cookie cookie = new Cookie("token", token);
 			cookie.setMaxAge(MiaoshaUserKey.getByUUId.expireSeconds());
@@ -94,7 +95,7 @@ public class MiaoshaUserService {
 		
 		String mobile = loginVo.getMobile();
 		String password = loginVo.getPassword();
-		
+		//普通参数校验,后面用了Jsr303
 		/*if(!ValidatorUtil.verifyMobile(mobile)){
 			return CodeMsg.MOBILE_ERROR;
 		}*/
@@ -109,6 +110,7 @@ public class MiaoshaUserService {
 //			return CodeMsg.PASSWORD_ERROR;
 			throw new GlobalException(CodeMsg.PASSWORD_ERROR);
 		}
+		
 		redisService.set(MiaoshaUserKey.getByUUId, uuid, user);
 		Cookie cookie = new Cookie("token", uuid);
 		cookie.setMaxAge(MiaoshaUserKey.getByUUId.expireSeconds());

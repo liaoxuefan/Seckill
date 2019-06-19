@@ -1,6 +1,5 @@
 package com.imooc.seckill.redis;
 
-import org.hibernate.validator.internal.util.privilegedactions.GetAnnotationParameter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -57,6 +56,7 @@ public class RedisService {
 			if(prefix.expireSeconds()<=0){
 				jedis.set(realKey, str);
 			}else{
+				//有过期时间则setex()
 				jedis.setex(realKey, prefix.expireSeconds(), str);
 			}
 			return true;
@@ -100,7 +100,9 @@ public class RedisService {
 			jedis.close();
 		}
 	}
-
+	/*
+	 * 将字符串转换成具体的对象
+	 */
 	@SuppressWarnings("unchecked")
 	public <T> T stringToBean(String str,Class<T> clazz){
 		if(str==null || str.length()<=0 || clazz==null){
@@ -119,6 +121,7 @@ public class RedisService {
 	
 	/*
 	 * 对值类型为int或long的数据自增
+	 * 如果是字符串，它会返回-1或+1
 	 */
 	public Long incr(KeyPrefix prefix, String str) {
 		Jedis jedis = null;

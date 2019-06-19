@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.imageio.ImageIO;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.InitializingBean;
@@ -18,11 +19,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.imooc.seckill.access.AccessLimit;
 import com.imooc.seckill.domain.GoodsVo;
 import com.imooc.seckill.domain.MiaoshaOrder;
 import com.imooc.seckill.domain.MiaoshaUser;
 import com.imooc.seckill.rabbitmq.MQSender;
 import com.imooc.seckill.rabbitmq.MiaoshaMessage;
+import com.imooc.seckill.redis.AccessKey;
 import com.imooc.seckill.redis.GoodsKey;
 import com.imooc.seckill.redis.OrderKey;
 import com.imooc.seckill.redis.RedisService;
@@ -101,12 +104,17 @@ public class MiaoshaController implements InitializingBean{
 		return miaoshaService.getMiaoshaResult(user.getId(),goodsId);
 	}
 	
+	@AccessLimit(seconds=5, maxCount=5, needLogin=true)
 	@RequestMapping("/path")
 	@ResponseBody
-	public Result<String> getPath(MiaoshaUser user,@RequestParam("goodsId") long goodsId,@RequestParam("verifyCode") Integer verifyCode){
+	public Result<String> getPath(MiaoshaUser user,@RequestParam("goodsId") long goodsId,
+								@RequestParam("verifyCode") Integer verifyCode,HttpServletRequest request){
 		if(user == null){
 			return Result.error(CodeMsg.MOBILE_NOT_EXIST);
 		}
+		//判断访问次数,移至拦截器中
+		
+		
 		if(verifyCode == null){
 			return Result.error(CodeMsg.VERIFYCODE_EMPTY);
 		}

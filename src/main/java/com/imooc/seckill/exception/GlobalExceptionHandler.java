@@ -24,6 +24,7 @@ public class GlobalExceptionHandler {
 		}else if(e instanceof BindException){
 			List<ObjectError> errors = ((BindException) e).getAllErrors();
 			ObjectError error = errors.get(0);
+			//填充BIND_ERROR中的%s
 			CodeMsg cm = CodeMsg.BIND_ERROR.fillArgs(error.getDefaultMessage());
 			return Result.exception(cm);
 		}else{

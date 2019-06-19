@@ -4,7 +4,7 @@
     <title>登录</title>
     <!-- <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /> -->
     <meta charset="UTF-8"/>
-    
+    <!-- 当时测试的时候发现样式导入不了，原因：@RequestMapping("/login")写成了@Controller("/login") -->
     <!-- jquery -->
     <script type="text/javascript" th:src="@{/js/jquery.min.js}"></script>
     <!-- bootstrap -->
@@ -69,15 +69,15 @@
 		});
 	}
 	function doLogin(){
-		g_showLoading();
-		
+		g_showLoading();//common.js中的loading展示
+		//第一次MD5
 		var salt = g_passsword_salt;
 		var mobile = $("#mobile").val();
 		var str = ""+salt.charAt(0)+salt.charAt(2) + $("#password").val() +salt.charAt(5) + salt.charAt(4);
 		var password = md5(str);
 		
 		$.ajax({
-			url:"/login/do_login",
+			url:"/login/do_login",//见LoginController
 			type:"POST",
 			data:{
 				mobile:mobile,
